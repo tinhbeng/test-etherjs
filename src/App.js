@@ -7,15 +7,11 @@ import { ABI, BUSDABI } from "./constanst";
 const { ethereum } = window;
 
 function getContract(ABI, contractAddress) {
-  // const provider = new ethers.providers.Web3Provider(ethereum);
-  // const url = "https://proxy.devnet.neonlabs.org/solana";
-  const url = "https://bsc-dataseed.binance.org/";
-  const provider = new ethers.providers.StaticJsonRpcProvider(url);
-  // console.log(provider);
-  // console.log(new ethers.Contract(contractAddress, ABI, provider));
-  // console.log("provider", contractAddress, ABI);
+  const url = "https://proxy.devnet.neonlabs.org/solana";
+  // const url = "https://bsc-dataseed.binance.org/";
+  // const provider = new ethers.providers.Web3Provider(url);
+  const provider = new ethers.providers.JsonRpcProvider(url);
   return new ethers.Contract(contractAddress, ABI, provider);
-  // return new web3.eth.Contract(ABI, contractAddress);
 }
 function App() {
   const [data, setData] = useState();
@@ -26,7 +22,7 @@ function App() {
   useEffect(() => {
     const fetData = async () => {
       try {
-        const result = await contractData.name();
+        const result = await contractData.decimals();
         console.log("result:", result);
         setData(result);
       } catch (e) {
@@ -40,7 +36,7 @@ function App() {
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-        <p>{data}</p>
+        <pre>{data}</pre>
       </header>
     </div>
   );
