@@ -6,7 +6,7 @@ import { ABI } from "./constanst";
 const { ethereum } = window;
 
 function getContract(ABI, contractAddress) {
-  // const provider = new ethers.providers.Web3Provider(ethereum); //ok
+  // const provider = new ethers.providers.Web3Provider(ethereum); //ok - switch Metamask to NeonDevnet
   const url = "https://proxy.devnet.neonlabs.org/solana";
   const provider = new ethers.providers.JsonRpcProvider(url); // not work
   return new ethers.Contract(contractAddress, ABI, provider);
